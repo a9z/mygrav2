@@ -1,0 +1,74 @@
+# syntax=docker/dockerfile:1
+
+FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.23
+
+ARG BUILD_DATE
+ARG VERSION
+ARG GRAV_RELEASE
+LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+LABEL maintainer="a9z"
+
+COPY grav-admin-v${GRAV_RELEASE}.zip /tmp/grav.zip
+COPY theme-learn2-v1.8.6.zip /tmp/theme-learn2.zip
+
+
+RUN \
+  echo "**** install runtime packages ****" && \
+  apk add --no-cache \
+    npm \
+    busybox-suid \
+    nginx-mod-http-brotli \
+    php85-dom \
+    php85-fpm \
+    php85-gd \
+    php85-intl \
+    php85-ldap \
+    php85-pdo \
+    php85-pdo_sqlite \
+    php85-pecl-apcu \
+    php85-pecl-yaml \
+    php85-redis \
+    php85-tokenizer && \
+  echo "**** configure php-fpm to pass env vars ****" && \
+  sed -E -i 's/^;?clear_env ?=.*$/clear_env = no/g' /etc/php85/php-fpm.d/www.conf && \
+  grep -qxF 'clear_env = no' /etc/php85/php-fpm.d/www.conf || echo 'clear_env = no' >> /etc/php85/php-fpm.d/www.conf && \
+  echo "env[PATH] = /usr/local/bin:/usr/bin:/bin" >> /etc/php85/php-fpm.conf && \
+  echo "**** setup php opcache ****" && \
+  { \
+    echo 'opcache.enable = 1'; \
+    echo 'opcache.memory_consumption=128'; \
+    echo 'opcache.interned_strings_buffer=8'; \
+    echo 'opcache.max_accelerated_files=4000'; \
+    echo 'opcache.revalidate_freq=2'; \
+    echo 'opcache.enable_cli=1'; \
+  } > /etc/php85/conf.d/php-opcache.ini && \
+  if [ -z ${GRAV_RELEASE+x} ]; then \
+    GRAV_RELEASE=$(curl -sX GET "https://api.github.com/repos/getgrav/grav/releases/latest" \
+    | awk '/tag_name/{print $4;exit}' FS='[""]'); \
+  fi && \
+  echo "*** Installing Grav ***" && \
+  mkdir -p \
+    /app/www/public && \
+#  curl -o \
+#    /tmp/grav.zip -L \
+#    "https://github.com/getgrav/grav/releases/download/${GRAV_RELEASE}/grav-admin-v${GRAV_RELEASE}.zip" && \
+  unzip -q \
+    /tmp/grav.zip -d /tmp/grav && \
+  cp -R /tmp/grav/grav-admin/* /app/www/public/ && \
+  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version
+
+
+#RUN \
+#  echo "**** cleanup ****" && \
+#  rm -rf \
+#    /tmp/* \
+#    $HOME/.cache \
+#    $HOME/.composer
+
+# copy local files
+COPY root/ /
+
+# ports and volumes
+EXPOSE 80 443
+
+VOLUME /config
