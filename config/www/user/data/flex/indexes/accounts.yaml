@@ -1,0 +1,9 @@
+version: '1.2'
+timestamp: 1782388076
+count: 1
+index:
+  admin:
+    storage_key: admin
+    storage_timestamp: 1782388072
+    key: admin
+    email: admin@admin.org

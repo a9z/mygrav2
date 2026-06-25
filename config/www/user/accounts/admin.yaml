@@ -1,0 +1,19 @@
+state: enabled
+email: admin@admin.org
+fullname: admin
+title: Administrator
+access:
+  site:
+    login: true
+  api:
+    super: true
+hashed_password: $2y$12$fpFEDC0SOHhR8AW.BSugtuiUWT5l7Q9O3.ll4PNuACFqAURBH9DaO
+created: 1782385907
+modified: 1782385907
+avatar: {  }
+twofa_enabled: false
+twofa_secret: ''
+admin_next:
+  preferences:
+    pagesViewMode: tree
+    themesViewMode: cards

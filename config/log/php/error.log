@@ -1,0 +1,15 @@
+[25-Jun-2026 09:09:22] NOTICE: fpm is running, pid 272
+[25-Jun-2026 09:09:22] NOTICE: ready to handle connections
+[25-Jun-2026 09:14:43] NOTICE: Terminating ...
+[25-Jun-2026 09:14:43] NOTICE: exiting, bye-bye!
+[25-Jun-2026 11:10:58] NOTICE: fpm is running, pid 252
+[25-Jun-2026 11:10:58] NOTICE: ready to handle connections
+[25-Jun-2026 11:11:50] WARNING: [pool www] server reached pm.max_children setting (5), consider raising it
+[25-Jun-2026 11:19:28] NOTICE: Terminating ...
+[25-Jun-2026 11:19:28] NOTICE: exiting, bye-bye!
+[25-Jun-2026 11:19:36] NOTICE: fpm is running, pid 237
+[25-Jun-2026 11:19:36] NOTICE: ready to handle connections
+[25-Jun-2026 11:30:24] WARNING: [pool www] server reached pm.max_children setting (5), consider raising it
+[25-Jun-2026 11:34:01] WARNING: [pool www] server reached pm.max_children setting (5), consider raising it
+[25-Jun-2026 11:37:36] WARNING: [pool www] server reached pm.max_children setting (5), consider raising it
+[25-Jun-2026 11:47:56] WARNING: [pool www] server reached pm.max_children setting (5), consider raising it

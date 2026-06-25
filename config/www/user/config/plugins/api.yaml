@@ -1,0 +1,4 @@
+auth:
+  jwt_secret: 719f8cbdc81b82c31dd10fb47e6426bef5d80e6a7601c9479ba5ac7a7b907eb0
+popularity:
+  salt: 3edb7e5693dde2ee2c70855edbf81a7a4b8353a3e61641252c114206fe06654b

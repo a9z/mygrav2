@@ -1,0 +1,29 @@
+timezone: null
+custom_base_url: null
+pages:
+  theme: learn2
+  order_digits: 4
+  list:
+    count: 1000
+  markdown:
+    extra: true
+    auto_line_breaks: true
+    auto_url_links: true
+    escape_markup: true
+  append_url_extension: null
+  redirect_default_code: '302'
+cache:
+  redis:
+    socket: ''
+errors:
+  display: 1
+images:
+  cls:
+    retina_scale: '1'
+gpm:
+  releases: testing
+  verify_peer: true
+  proxy_url: '127.0.0.1:999'
+updates:
+  safe_upgrade: false
+  safe_upgrade_snapshot_limit: 5
