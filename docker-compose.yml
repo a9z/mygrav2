@@ -1,0 +1,20 @@
+---
+services:
+  mygrav:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        BUILD_DATE: "2026-06-25"
+        VERSION: "0.0.1"
+        GRAV_RELEASE: "2.0.2"
+    container_name: grav2
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ./config:/config
+    ports:
+      - 80:80
+    restart: unless-stopped
